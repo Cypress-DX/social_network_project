@@ -1,7 +1,37 @@
-.ul li{
-  color: cornflowerblue;
+.app-wrapper {
+  width: 1200px;
+  display: grid;
+
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+  grid-gap: 5px;
+
+  grid-template-areas:
+    "h h"
+    "n c";
 }
 
-.random {
-  color: red;
+.header {
+  grid-area: h;
+  background-color: aqua;
+}
+
+.header img {
+  width: 75px;
+}
+
+.nav {
+  grid-area: n;
+  background-color: coral;
+}
+
+.content {
+  grid-area: c;
+  background-color: khaki;
+}
+
+.content img {
+  margin: 0 auto;
+  height: 500px;
+  alignment: center;
 }
