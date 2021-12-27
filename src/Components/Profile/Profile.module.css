@@ -1,0 +1,14 @@
+.content {
+    grid-area: c;
+    background-color: khaki;
+}
+
+.content img {
+    margin: 0 auto;
+    height: 500px;
+    alignment: center;
+}
+
+.item {
+    color: azure;
+}

@@ -11,27 +11,5 @@
     "n c";
 }
 
-.header {
-  grid-area: h;
-  background-color: aqua;
-}
 
-.header img {
-  width: 75px;
-}
 
-.nav {
-  grid-area: n;
-  background-color: coral;
-}
-
-.content {
-  grid-area: c;
-  background-color: khaki;
-}
-
-.content img {
-  margin: 0 auto;
-  height: 500px;
-  alignment: center;
-}
