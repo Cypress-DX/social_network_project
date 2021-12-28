@@ -4,11 +4,6 @@
 }
 
 .content img {
-    margin: 0 auto;
     height: 500px;
     alignment: center;
-}
-
-.item {
-    color: azure;
 }
