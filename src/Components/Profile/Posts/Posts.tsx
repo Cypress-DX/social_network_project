@@ -7,8 +7,8 @@ export const Posts = () => {
         <div className={s.content}>
                 My posts
                 <div>
-                    <textarea/>
-                    <button>Add Post</button>
+                    <div><textarea/></div>
+                    <div> <button>Add Post</button></div>
                     <Post
                         message = "Hi, how are you?"
                           likes = {4}
