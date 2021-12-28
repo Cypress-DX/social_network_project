@@ -1,9 +1,10 @@
 .nav {
     grid-area: n;
     background-color: coral;
+    padding: 10px;
 }
 
-.item {
+.item a{
     color: white;
 }
 
