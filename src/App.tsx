@@ -4,6 +4,11 @@ import {Header} from "./Components/Header/Header";
 import {Navbar} from "./Components/Navbar/Navbar";
 import {Profile} from "./Components/Profile/Profile";
 import {Dialogs} from "./Components/Dialogs/Dialogs";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {News} from "./Components/News/News";
+import {Music} from "./Components/Music/Music";
+import {Settings} from "./Components/Settings/Settings";
+
 
 
 
@@ -11,14 +16,22 @@ import {Dialogs} from "./Components/Dialogs/Dialogs";
 
 const App = () => {
     return (
+        <BrowserRouter>
         <div className='app-wrapper'>
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Dialogs />
+                <Routes>
+                    <Route path = '/Dialogs' element={<Dialogs />} />
+                    <Route path = '/Profile' element={<Profile />} />
+                    <Route path = '/Music' element={<Music />} />
+                    <Route path = '/News' element={<News />} />
+                    <Route path = '/Settings' element={<Settings />} />
+                </Routes>
+
             </div>
-            {/*<Profile/>*/}
         </div>
+        </BrowserRouter>
 )
 }
 
