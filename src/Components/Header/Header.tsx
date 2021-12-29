@@ -5,7 +5,7 @@ import s from "./Header.module.css";
 export const Header = () => {
     return (
         <header className={s.header}>
-            <img src="https://lh3.googleusercontent.com/proxy/xfAdf_QKjdhuT_QLA60YiWHD6JZCM7rjLBON9HmUTlXqb4Y0X58e3GYE1riO2atE_scHOhgv6nN56KBxhWQH1KonA_7O50RH3VF-AHrv3AYLPQ"/>
+            <img src="https://cdn.dribbble.com/users/230124/screenshots/7940017/media/0aa71f8ee30791bd1686b999c434e3e8.jpg?compress=1&resize=1600x1200"/>
         </header>
     )
 }
