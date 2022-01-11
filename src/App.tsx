@@ -8,11 +8,10 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
-import {StateType} from "./redux/state";
+import {AppType, StateType} from "./redux/state";
 
 
-
-const App = (props: StateType) => {
+const App = (props: AppType) => {
     const messagesPage = props.messagesPage
     const postPage = props.profilePage
     return (
@@ -30,6 +29,7 @@ const App = (props: StateType) => {
                         />}/>
                         <Route path='/Profile' element={<Profile
                             posts={postPage.posts}
+                            addPost={props.addPost}
                         />}/>
                         <Route path='/Music' element={<Music/>}/>
                         <Route path='/News' element={<News/>}/>

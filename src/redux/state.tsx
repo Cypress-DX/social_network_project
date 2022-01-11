@@ -1,5 +1,8 @@
+import {reRenderEntireTree} from "../render";
+
 export type PostsType = {
-    message: string
+    id: number
+    message: string | undefined
     likes: number
 }
 export type ProfilePageType = {
@@ -31,12 +34,18 @@ export type StateType = {
     messagesPage: MessagesPageType
     sideBar: SideBarType
 }
+export type AppType = {
+    profilePage: ProfilePageType
+    messagesPage: MessagesPageType
+    sideBar: SideBarType
+    addPost: (postMessage: string | undefined)=>void
+}
 const state: StateType = {
     profilePage: {
         posts: [
-            {message: "Hi, how are you????", likes: 4},
-            {message: "It is my second post", likes: 3},
-            {message: "I am learning React in IT Inkubator", likes: 0},
+            {id: 1, message: "Hi, how are you????", likes: 4},
+            {id: 2, message: "It is my second post", likes: 3},
+            {id: 3, message: "I am learning React in IT Inkubator", likes: 0},
         ]
     },
     messagesPage: {
@@ -61,6 +70,15 @@ const state: StateType = {
         ]
     }
 }
-
+export let addPost=(postMessage: string | undefined)=>{
+    // debugger;
+    let newPost={
+        id: 4,
+        message: postMessage,
+        likes: 0
+    }
+    state.profilePage.posts.push(newPost)
+    reRenderEntireTree(state)
+}
 export default state;
 

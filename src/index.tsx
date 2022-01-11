@@ -4,19 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Post} from "./Components/Profile/Posts/Post/Post";
-import state from "./redux/state";
+import state, {addPost} from "./redux/state";
+import {reRenderEntireTree} from "./render";
 
+// addPost("CheckCheck")
 
-ReactDOM.render(
-    <React.StrictMode>
-        <App
-            profilePage={state.profilePage}
-            messagesPage={state.messagesPage}
-            sideBar={state.sideBar}
-        />
-    </React.StrictMode>,
-    document.getElementById('root')
-);
+reRenderEntireTree(state)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
