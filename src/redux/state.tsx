@@ -2,22 +2,24 @@ import {reRenderEntireTree} from "../render";
 
 export type PostsType = {
     id: number
-    message: string | undefined
+    message: string
     likes: number
 }
 export type ProfilePageType = {
     posts: Array<PostsType>
+    newPostData: string
 }
-type MessagesType = {
+export type MessagesType = {
     message: string
 }
-type DialogsType = {
+export type DialogsType = {
     id: number
     name: string
 }
 export type MessagesPageType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
+    newMessageText: string
 }
 
 export type FriendsType = {
@@ -38,7 +40,10 @@ export type AppType = {
     profilePage: ProfilePageType
     messagesPage: MessagesPageType
     sideBar: SideBarType
-    addPost: (postMessage: string | undefined)=>void
+    addPost: (postMessage: string) => void
+    updateNewPostText: (newPostData: string) => void
+    addMessage: (messageText: string) => void
+    updateNewMessageText: (newMessage: string) => void
 }
 const state: StateType = {
     profilePage: {
@@ -46,7 +51,8 @@ const state: StateType = {
             {id: 1, message: "Hi, how are you????", likes: 4},
             {id: 2, message: "It is my second post", likes: 3},
             {id: 3, message: "I am learning React in IT Inkubator", likes: 0},
-        ]
+        ],
+        newPostData: ''
     },
     messagesPage: {
         messages: [
@@ -60,7 +66,8 @@ const state: StateType = {
             {id: 3, name: "NickJagger"},
             {id: 3, name: "Sasha"},
             {id: 3, name: "Mauzer"},
-        ]
+        ],
+        newMessageText: ''
     },
     sideBar: {
         friends: [
@@ -70,14 +77,32 @@ const state: StateType = {
         ]
     }
 }
-export let addPost=(postMessage: string | undefined)=>{
+export const addPost = () => {
     // debugger;
-    let newPost={
+    let newPost: PostsType = {
         id: 4,
-        message: postMessage,
+        message: state.profilePage.newPostData,
         likes: 0
     }
     state.profilePage.posts.push(newPost)
+    reRenderEntireTree(state)
+}
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostData = newText
+    reRenderEntireTree(state)
+}
+
+export const addMessage = () => {
+    const newMessage: MessagesType = {
+        message: state.messagesPage.newMessageText
+    }
+    state.messagesPage.messages.push(newMessage)
+    reRenderEntireTree(state)
+}
+
+export const updateNewMessageText = (newMessage: string) => {
+    state.messagesPage.newMessageText = newMessage
     reRenderEntireTree(state)
 }
 export default state;

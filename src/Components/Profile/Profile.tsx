@@ -5,7 +5,9 @@ import {ProfileData} from "./ProfileData/ProfileData";
 import {PostsType, ProfilePageType} from "../../redux/state";
 type PropsType = {
     posts: Array<PostsType>
-    addPost: (postMessage: string | undefined) => void
+    newPostData: string
+    addPost: (postMessage: string) => void
+    updateNewPostText: (newPostData: string) => void
 }
 
 export const Profile = (props: PropsType) => {
@@ -14,7 +16,9 @@ export const Profile = (props: PropsType) => {
             <ProfileData/>
             <Posts
             posts = {props.posts}
+            newPostData={props.newPostData}
             addPost={props.addPost}
+            updateNewPostText={props.updateNewPostText}
             />
         </div>
     )

@@ -4,10 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Post} from "./Components/Profile/Posts/Post/Post";
-import {addPost, StateType} from "./redux/state";
+import {addMessage, addPost, StateType, updateNewMessageText, updateNewPostText} from "./redux/state";
 
 
-export let reRenderEntireTree=(state: StateType)=>{
+export const reRenderEntireTree=(state: StateType)=>{
     ReactDOM.render(
         <React.StrictMode>
             <App
@@ -15,6 +15,9 @@ export let reRenderEntireTree=(state: StateType)=>{
                 messagesPage={state.messagesPage}
                 sideBar={state.sideBar}
                 addPost={addPost}
+                updateNewPostText={updateNewPostText}
+                addMessage={addMessage}
+                updateNewMessageText={updateNewMessageText}
             />
         </React.StrictMode>,
         document.getElementById('root')
