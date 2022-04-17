@@ -2,33 +2,32 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import state, {addPost, subscribe} from "./redux/state";
+import store, {StateType} from "./redux/state";
 
 import reportWebVitals from './reportWebVitals';
 import {Post} from "./Components/Profile/Posts/Post/Post";
-import {addMessage, StateType, updateNewMessageText, updateNewPostText} from "./redux/state";
 
-
-const reRenderEntireTree=()=>{
+const reRenderEntireTree=(state: StateType)=>{
     ReactDOM.render(
         <React.StrictMode>
             <App
-                profilePage={state.profilePage}
-                messagesPage={state.messagesPage}
-                sideBar={state.sideBar}
-                addPost={addPost}
-                updateNewPostText={updateNewPostText}
-                addMessage={addMessage}
-                updateNewMessageText={updateNewMessageText}
+                // profilePage={state.profilePage}
+                // messagesPage={state.messagesPage}
+                // sideBar={state.sideBar}
+                state={state}
+                addPost={store.addPost.bind(store)}
+                updateNewPostText={store.updateNewPostText.bind(store)}
+                addMessage={store.addMessage.bind(store)}
+                updateNewMessageText={store.updateNewMessageText.bind(store)}
             />
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
-reRenderEntireTree()
+reRenderEntireTree(store.getState())
 
-subscribe(reRenderEntireTree)
+store.subscribe(reRenderEntireTree)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

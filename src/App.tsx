@@ -8,18 +8,18 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
-import {AppType, StateType, updateNewPostText} from "./redux/state";
+import  {AppType, StateType} from "./redux/state";
 
 
 const App = (props: AppType) => {
-    const messagesPage = props.messagesPage
-    const postPage = props.profilePage
+    const messagesPage = props.state.messagesPage
+    const postPage = props.state.profilePage
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar
-               friends={props.sideBar.friends}
+               friends={props.state.sideBar.friends}
                 />
                 <div className='app-wrapper-content'>
                     <Routes>
@@ -35,7 +35,7 @@ const App = (props: AppType) => {
                             posts={postPage.posts}
                             newPostData={postPage.newPostData}
                             addPost={props.addPost}
-                            updateNewPostText={updateNewPostText}
+                            updateNewPostText={props.updateNewPostText}
                         />}/>
                         <Route path='/Music' element={<Music/>}/>
                         <Route path='/News' element={<News/>}/>
