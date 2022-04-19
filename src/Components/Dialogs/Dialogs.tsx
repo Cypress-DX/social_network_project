@@ -2,13 +2,14 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import {Dialog} from "./dialog/Dialog";
 import { Message } from "./Message/Message";
-import {DialogsType, MessagesPageType, MessagesType} from "../../redux/state";
+import {DialogsType, DispatchActionType, MessagesPageType, MessagesType} from "../../redux/state";
 
 type PropsType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
-    addMessage: (newMessage: string) => void
-    updateNewMessageText: (newMessage: string) => void
+    dispatch: (action: DispatchActionType) => void
+    // addMessage: (newMessage: string) => void
+    // updateNewMessageText: (newMessage: string) => void
     newMessageText: string
 }
 
@@ -18,17 +19,22 @@ export const Dialogs = (props: PropsType) => {
 
     const messageElement = props.messages.map(m => <Message message={m.message}/>)
 
-    // let newMessageElement = React.createRef<HTMLTextAreaElement>()
+    let newMessageElement = React.createRef<HTMLTextAreaElement>()
 
     const addMessage=()=>{
-        props.addMessage(props.newMessageText)
-        props.updateNewMessageText('')
+
+
+        // props.addMessage(props.newMessageText)
+        // props.updateNewMessageText('')
+        props.dispatch({type: "ADD-MESSAGE"})
+        props.dispatch({type: "UPDATE-NEW-MESSAGE-TEXT", newMessage: ""})
        // let text = newMessageElement.current?.value
        // alert(text)
     }
 
     const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewMessageText(e.currentTarget.value)
+        // props.updateNewMessageText(e.currentTarget.value)
+        props.dispatch({type: "UPDATE-NEW-MESSAGE-TEXT", newMessage:e.currentTarget.value})
     }
 
     return (

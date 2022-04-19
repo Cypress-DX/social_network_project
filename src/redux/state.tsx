@@ -1,81 +1,128 @@
 export type StoreType = {
     _state: StateType
-    getState: () => StateType
     _callSubscriber: (state: StateType) => void
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    subscribe: (observer:(p: any) => void) => void
-    addMessage: () => void
-    updateNewMessageText: (newMessage: string) => void
+    getState: () => StateType
+    subscribe: (observer: (p: any) => void) => void
+    // addPost: () => void
+    // updateNewPostText: (newText: string) => void
+    // addMessage: () => void
+    // updateNewMessageText: (newMessage: string) => void
+    dispatch: (action: DispatchActionType) => void
+}
+
+export type DispatchActionType = AddPostActionType | UpdateNewPostTextType |
+    AddMessageType | UpdateNewMessageTextType
+
+export type AddPostActionType = {
+    type: 'ADD-POST'
+}
+
+export type UpdateNewPostTextType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+
+export type AddMessageType = {
+    type: 'ADD-MESSAGE'
+}
+
+export type UpdateNewMessageTextType = {
+    type: 'UPDATE-NEW-MESSAGE-TEXT'
+    newMessage: string
 }
 
 let store: StoreType = {
     _state: {
-    profilePage: {
-        posts: [
-            {id: 1, message: "Hi, how are you????", likes: 4},
-            {id: 2, message: "It is my second post", likes: 3},
-            {id: 3, message: "I am learning React in IT Inkubator", likes: 0},
-        ],
-        newPostData: ''
+        profilePage: {
+            posts: [
+                {id: 1, message: "Hi, how are you????", likes: 4},
+                {id: 2, message: "It is my second post", likes: 3},
+                {id: 3, message: "I am learning React in IT Inkubator", likes: 0},
+            ],
+            newPostData: ''
+        },
+        messagesPage: {
+            messages: [
+                {message: "Hello"},
+                {message: "How are you doing?"},
+                {message: "I live in Kotlas"}
+            ],
+            dialogs: [
+                {id: 1, name: "Dima"},
+                {id: 2, name: "Alex"},
+                {id: 3, name: "NickJagger"},
+                {id: 3, name: "Sasha"},
+                {id: 3, name: "Mauzer"},
+            ],
+            newMessageText: ''
+        },
+        sideBar: {
+            friends: [
+                {id: 1, name: "Irishka", status: "love"},
+                {id: 2, name: "Edik", status: "helper"},
+                {id: 3, name: "Maksim", status: "adviser"},
+            ]
+        }
     },
-    messagesPage: {
-        messages: [
-            {message: "Hello"},
-            {message: "How are you doing?"},
-            {message: "I live in Kotlas"}
-        ],
-        dialogs: [
-            {id: 1, name: "Dima"},
-            {id: 2, name: "Alex"},
-            {id: 3, name: "NickJagger"},
-            {id: 3, name: "Sasha"},
-            {id: 3, name: "Mauzer"},
-        ],
-        newMessageText: ''
-    },
-    sideBar: {
-        friends: [
-            {id: 1, name: "Irishka", status: "love"},
-            {id: 2, name: "Edik", status: "helper"},
-            {id: 3, name: "Maksim", status: "adviser"},
-        ]
-    }
-},
-    getState () {
-        return this._state
-    },
-    _callSubscriber () {
+    _callSubscriber() {
         console.log("state changed")
     },
-    addPost () {
-        // debugger;
-        console.log(this.getState())
-        let newPost: PostsType = {
-            id: 4,
-            message: this._state.profilePage.newPostData,
-            likes: 0
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._callSubscriber(this._state)
+    getState() {
+        return this._state
     },
-    updateNewPostText (newText: string) {
-        this._state.profilePage.newPostData = newText
-       this._callSubscriber(this._state)
-    },
-    addMessage () {
-    const newMessage: MessagesType = {
-        message: this._state.messagesPage.newMessageText
-    }
-    this._state.messagesPage.messages.push(newMessage)
-        this._callSubscriber(this._state)
-},
-    updateNewMessageText (newMessage: string) {
-    this._state.messagesPage.newMessageText = newMessage
-        this._callSubscriber(this._state)
-},
-    subscribe (observer: (p: any) => void) {
+    subscribe(observer: (p: any) => void) {
         this._callSubscriber = observer
+    },
+
+    // addPost() {
+    //     // debugger;
+    //     console.log(this.getState())
+    //     let newPost: PostsType = {
+    //         id: 4,
+    //         message: this._state.profilePage.newPostData,
+    //         likes: 0
+    //     }
+    //     this._state.profilePage.posts.push(newPost)
+    //     this._callSubscriber(this._state)
+    // },
+    // updateNewPostText(newText: string) {
+    //     this._state.profilePage.newPostData = newText
+    //     this._callSubscriber(this._state)
+    // },
+    // addMessage() {
+    //     const newMessage: MessagesType = {
+    //         message: this._state.messagesPage.newMessageText
+    //     }
+    //     this._state.messagesPage.messages.push(newMessage)
+    //     this._callSubscriber(this._state)
+    // },
+    // updateNewMessageText(newMessage: string) {
+    //     this._state.messagesPage.newMessageText = newMessage
+    //     this._callSubscriber(this._state)
+    // },
+    dispatch(action) {
+        if (action.type === "ADD-POST") {
+            console.log(this.getState())
+            let newPost: PostsType = {
+                id: 4,
+                message: this._state.profilePage.newPostData,
+                likes: 0
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._callSubscriber(this._state)
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+            this._state.profilePage.newPostData = action.newText
+            this._callSubscriber(this._state)
+        } else if (action.type === "ADD-MESSAGE") {
+            const newMessage: MessagesType = {
+                message: this._state.messagesPage.newMessageText
+            }
+            this._state.messagesPage.messages.push(newMessage)
+            this._callSubscriber(this._state)
+        } else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
+            this._state.messagesPage.newMessageText = action.newMessage
+            this._callSubscriber(this._state)
+        }
     }
 }
 
@@ -155,10 +202,11 @@ export type AppType = {
     // messagesPage: MessagesPageType
     // sideBar: SideBarType
     state: StateType
-    addPost: (postMessage: string) => void
-    updateNewPostText: (newPostData: string) => void
-    addMessage: (messageText: string) => void
-    updateNewMessageText: (newMessage: string) => void
+    dispatch: (action: DispatchActionType) => void
+    // addPost: (postMessage: string) => void
+    // updateNewPostText: (newPostData: string) => void
+    // addMessage: (messageText: string) => void
+    // updateNewMessageText: (newMessage: string) => void
 }
 
 // export const addPost = () => {

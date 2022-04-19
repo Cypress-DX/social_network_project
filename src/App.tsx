@@ -26,16 +26,18 @@ const App = (props: AppType) => {
                         <Route path='/Dialogs/*' element={<Dialogs
                             dialogs={messagesPage.dialogs}
                             messages={messagesPage.messages}
-                            addMessage={props.addMessage}
-                            updateNewMessageText={props.updateNewMessageText}
+                            dispatch={props.dispatch}
+                            // addMessage={props.addMessage}
+                            // updateNewMessageText={props.updateNewMessageText}
                             newMessageText={messagesPage.newMessageText}
 
                         />}/>
                         <Route path='/Profile' element={<Profile
                             posts={postPage.posts}
                             newPostData={postPage.newPostData}
-                            addPost={props.addPost}
-                            updateNewPostText={props.updateNewPostText}
+                            dispatch={props.dispatch}
+                            // addPost={props.addPost}
+                            // updateNewPostText={props.updateNewPostText}
                         />}/>
                         <Route path='/Music' element={<Music/>}/>
                         <Route path='/News' element={<News/>}/>
